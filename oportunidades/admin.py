@@ -1,3 +1,4 @@
 from django.contrib import admin
+from oportunidades.models import Oportunidade
 
-# Register your models here.
+admin.site.register(Oportunidade)

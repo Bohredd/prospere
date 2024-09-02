@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from django.views.generic import ListView
+from .models import Oportunidade
 
-# Create your views here.
+
+class OportunidadeListView(ListView):
+    """View para listar todas as oportunidades."""
+
+    model = Oportunidade
+    template_name = "oportunidades/oportunidades_lista.html"
+    context_object_name = "oportunidades"

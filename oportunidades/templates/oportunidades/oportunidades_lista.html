@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Oportunidades</title>
+</head>
+<body>
+    <h1>Lista de Oportunidades</h1>
+    <ul>
+        {% for oportunidade in oportunidades %}
+            <li>
+                <strong>{{ oportunidade.nome }}</strong><br>
+                Tipo: {{ oportunidade.tipo }}<br>
+                Descrição: {{ oportunidade.descricao }}<br>
+                <a href="">Ver Detalhes</a>
+            </li>
+        {% empty %}
+            <li>Não há oportunidades disponíveis no momento.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
