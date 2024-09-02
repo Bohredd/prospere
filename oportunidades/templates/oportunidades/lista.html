@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Oportunidades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            padding: 20px;
+            transition: 0.3s;
+        }
+        .card:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .card h2 {
+            margin: 0 0 10px;
+        }
+        .card p {
+            margin: 0 0 10px;
+        }
+        .card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .card a:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Oportunidades</h1>
+        <form method="get">
+            {{ filter.form.as_p }}
+            <button type="submit">Filtrar</button>
+        </form>
+        {% for oportunidade in oportunidades %}
+            <div class="card">
+                <h2>{{ oportunidade.titulo }}</h2>
+                <p>Tipo: {{ oportunidade.get_tipo_display }}</p>
+                <a href="{% url 'detalhes_oportunidade' oportunidade.id %}">Ver Detalhes</a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

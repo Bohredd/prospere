@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalhes da Oportunidade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            padding: 20px;
+            transition: 0.3s;
+        }
+        .card:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .card h2 {
+            margin: 0 0 10px;
+        }
+        .card p {
+            margin: 0 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ oportunidade.titulo }}</h1>
+        <div class="card">
+            <h2>Detalhes da Oportunidade</h2>
+            <p><strong>Descrição:</strong> {{ oportunidade.descricao }}</p>
+            <p><strong>Tipo:</strong> {{ oportunidade.get_tipo_display }}</p>
+            <p><strong>Remuneração:</strong> {{ oportunidade.remuneracao }}</p>
+            <p><strong>Quantidade:</strong> {{ oportunidade.quantia }}</p>
+            <p><strong>Universidade:</strong> {{ oportunidade.universidade }}</p>
+            <p><strong>Cursos:</strong> {% for curso in oportunidade.cursos.all %}{{ curso.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            <p><strong>Áreas de Atuação:</strong> {% for area in oportunidade.areas_atuacao.all %}{{ area.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            <p><strong>Cidade:</strong> {{ oportunidade.cidade }}</p>
+            <p><strong>Estado:</strong> {{ oportunidade.estado }}</p>
+            <p><strong>Tipo de Trabalho:</strong> {{ oportunidade.get_tipo_trabalho_display }}</p>
+        </div>
+    </div>
+</body>
+</html>
