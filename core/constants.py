@@ -17,3 +17,4 @@ class TipoTag(models.TextChoices):
     por_area = 'por_area', 'Por Area'
     por_tipo_trabalho = 'por_tipo_trabalho', 'Por Trabalho'
     por_tipo_oportunidade = 'por_tipo_oportunidade', 'Por Oportunidade'
+    por_evento = 'por_evento', 'Por Evento'

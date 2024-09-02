@@ -5,13 +5,21 @@
 </head>
 <body>
     <h1>Lista de Oportunidades</h1>
+
+    <!-- Formulário de Filtro -->
+    <form method="get" action="">
+        {{ form.as_p }}
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <!-- Lista de Oportunidades -->
     <ul>
         {% for oportunidade in oportunidades %}
             <li>
                 <strong>{{ oportunidade.nome }}</strong><br>
                 Tipo: {{ oportunidade.tipo }}<br>
                 Descrição: {{ oportunidade.descricao }}<br>
-                Registrado em: {{ oportunidade.criado_em}} <br>
+                Registrado em: {{ oportunidade.criado_em }}<br>
                 <a href="{% url 'oportunidade_detalhes' oportunidade.id %}">Ver Detalhes</a>
             </li>
         {% empty %}

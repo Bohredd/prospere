@@ -1,5 +1,5 @@
 from django import forms
-from .models import Solicitacao
+from core.models import Solicitacao, TipoTag
 
 class RequisitoOportunidadeForm(forms.ModelForm):
     class Meta:
@@ -49,3 +49,9 @@ class RequisitoOportunidadeForm(forms.ModelForm):
                 self.fields.pop('endereco')
             else:
                 self.fields['endereco'].required = True
+
+class TagFilterForm(forms.Form):
+    tipo_tag = forms.ChoiceField(
+        choices=[('', 'Todas')] + list(TipoTag.choices),
+        required=False
+    )
