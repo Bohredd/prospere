@@ -8,7 +8,42 @@
 
     <!-- Formulário de Filtro -->
     <form method="get" action="">
-        {{ form.as_p }}
+        <!-- Tipo de Tag -->
+        <div>
+            <label>Tipo de Tag:</label><br>
+            {{ filters.tipo_tag.form.as_p }}
+        </div>
+
+        <!-- Curso -->
+        <div>
+            {{ filters.curso_relacionado.form.as_p }}
+        </div>
+
+        <!-- Cidade -->
+        <div>
+            {{ filters.cidade_relacionado.form.as_p }}
+        </div>
+
+        <!-- Universidade -->
+        <div>
+            {{ filters.universidade_relacionado.form.as_p }}
+        </div>
+
+        <!-- Área -->
+        <div>
+            {{ filters.area_relacionado.form.as_p }}
+        </div>
+
+        <!-- Tipo de Oportunidade -->
+        <div>
+            {{ filters.tipo_oportunidade.form.as_p }}
+        </div>
+
+        <!-- Tipo de Trabalho -->
+        <div>
+            {{ filters.tipo_trabalho.form.as_p }}
+        </div>
+
         <button type="submit">Filtrar</button>
     </form>
 
