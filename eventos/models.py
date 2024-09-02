@@ -10,6 +10,9 @@ class Evento(models.Model):
     ativo = models.BooleanField(default=True)
     is_pago = models.BooleanField(default=False)
     valor_entrada = models.FloatField(null=True, blank=True)
+    tags = models.ManyToManyField('core.Tag', blank=True)
+    requisito = models.ForeignKey('core.RequisitoOportunidade', on_delete=models.CASCADE, null=True, blank=True)
+
 
     class Meta:
         verbose_name = "Evento"

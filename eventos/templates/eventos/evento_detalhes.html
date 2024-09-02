@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalhes do Evento</title>
+</head>
+<body>
+    <h1>{{ evento.nome }}</h1>
+    <p><strong>Tipo:</strong> {{ evento.tipo }}</p>
+    <p><strong>Descrição:</strong> {{ evento.descricao }}</p>
+    <p><strong>Data de Criação:</strong> {{ evento.criado_em }}</p>
+    <!-- Adicione mais campos conforme necessário -->
+
+    <a href="{% url 'ver_eventos' %}">Voltar para a lista</a>
+</body>
+</html>

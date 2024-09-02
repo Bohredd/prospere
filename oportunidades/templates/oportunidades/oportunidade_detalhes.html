@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalhes da Oportunidade</title>
+</head>
+<body>
+    <h1>{{ oportunidade.nome }}</h1>
+    <p><strong>Tipo:</strong> {{ oportunidade.tipo }}</p>
+    <p><strong>Descrição:</strong> {{ oportunidade.descricao }}</p>
+    <p><strong>Data de Criação:</strong> {{ oportunidade.criado_em }}</p>
+    <!-- Adicione mais campos conforme necessário -->
+
+    <a href="{% url 'ver_oportunidades' %}">Voltar para a lista</a>
+    <a href="{% url 'criar_solicitacao' 1 oportunidade.requisito.pk %}">Me interessei!</a>
+</body>
+</html>

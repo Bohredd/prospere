@@ -16,8 +16,10 @@ Including another URLconf
 """
 
 from django.urls import path
-from oportunidades.views import OportunidadeListView
+from oportunidades.views import OportunidadeListView, OportunidadeDetailView
 
 urlpatterns = [
     path("ver", OportunidadeListView.as_view(), name="ver_oportunidades"),
+    path('oportunidade/<int:pk>/', OportunidadeDetailView.as_view(), name='oportunidade_detalhes'),
+
 ]

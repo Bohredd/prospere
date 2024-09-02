@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "eventos",
     "oportunidades",
     "usuarios",
+    "universidades",
 ]
 
 MIDDLEWARE = [
