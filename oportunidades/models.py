@@ -7,7 +7,7 @@ class Oportunidade(models.Model):
     tipo = models.CharField(
         max_length=3,
         choices=TipoOportunidade.choices,
-        default=TipoOportunidade.ESTAGIO,
+        default='',
     )
     ativo = models.BooleanField(default=True)
     criado_em = models.DateTimeField(auto_now_add=True)
@@ -23,6 +23,20 @@ class Oportunidade(models.Model):
         max_length=2,
         choices=TipoTrabalho.choices,
         default=TipoTrabalho.PRESENCIAL,
+    )
+    requisitos_envio = models.ForeignKey(
+        'core.Requisito',
+        on_delete=models.CASCADE,
+    )
+    requisitos_oportunidade = models.CharField(
+        max_length=200,
+        null=True,
+        blank=True,
+    )
+    beneficios_oportunidade = models.CharField(
+        max_length=200,
+        null=True,
+        blank=True,
     )
 
     class Meta:

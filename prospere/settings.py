@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "oportunidades",
     "usuarios",
     "universidades",
+    "empresa",
 ]
 
 MIDDLEWARE = [

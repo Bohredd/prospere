@@ -15,6 +15,8 @@ class Usuario(AbstractUser):
     telefone = models.CharField(max_length=11, blank=True, null=True)  # (11) 98765-4321
     data_nascimento = models.DateField("Data de  Nascimento", blank=True, null=True)
     imagem = models.ImageField(blank=True, null=True,upload_to="usuarios/images")
+    pertence_empresa = models.BooleanField(default=False)
+    pertence_universidade = models.BooleanField(default=False)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["nome_completo"]
