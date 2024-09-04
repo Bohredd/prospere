@@ -13,9 +13,12 @@ class Oportunidade(models.Model):
     criado_em = models.DateTimeField(auto_now_add=True)
     is_remunerado = models.BooleanField(default=False)
     remuneracao = models.FloatField(default=0.0)
+    quantia_horas_semanais = models.IntegerField(default=0)
+    quantia_horas_dia = models.IntegerField(default=0)
+    quantia_horas_intervalo_dia = models.IntegerField(default=0)
     quantia = models.IntegerField(default=1)
     universidade = models.ForeignKey('universidades.Universidade', on_delete=models.CASCADE, null=True, blank=True)
-    cursos = models.ManyToManyField('universidades.Curso', blank=True)
+    cursos = models.ManyToManyField('universidades.Curso', blank=True, null=True)
     areas_atuacao = models.ManyToManyField('universidades.AreaAtuacao', blank=True)
     cidade = models.ForeignKey('universidades.Cidade', on_delete=models.CASCADE, null=True, blank=True)
     estado = models.ForeignKey('universidades.Estado', on_delete=models.CASCADE, null=True, blank=True)
@@ -38,6 +41,7 @@ class Oportunidade(models.Model):
         null=True,
         blank=True,
     )
+    empresa = models.ForeignKey('empresa.Empresa', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Oportunidade'

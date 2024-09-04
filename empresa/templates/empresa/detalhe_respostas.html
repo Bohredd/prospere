@@ -1,0 +1,56 @@
+
+  <h1>Respostas para a Oportunidade</h1>
+  <h2>Oportunidade: {{ interesse.vaga }}</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Texto</th>
+        <th>Arquivos</th>
+        <th>Foto</th>
+        <th>Links</th>
+        <th>Checkbox</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for resposta in respostas %}
+        <tr>
+          <td>{{ resposta.texto }}</td>
+          <td>
+            {% for arquivo in resposta.arquivos.all %}
+              <a href="{{ arquivo.file.url }}">{{ arquivo.file.name }}</a><br>
+            {% empty %}
+              Nenhum arquivo
+            {% endfor %}
+          </td>
+          <td>
+            {% if resposta.foto %}
+              <img src="{{ resposta.foto.url }}" alt="Foto" style="max-width: 150px;">
+            {% else %}
+              Nenhuma foto
+            {% endif %}
+          </td>
+          <td>
+            {% if resposta.links %}
+              <a href="{{ resposta.links }}">{{ resposta.links }}</a>
+            {% else %}
+              Nenhum link
+            {% endif %}
+          </td>
+          <td>{{ resposta.checkbox|yesno:"Sim,Não" }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">Nenhuma resposta encontrada.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+    <h2>Responder ao Interesse</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Enviar Resposta</button>
+    </form>
+
+  <a href="{% url 'lista_interesses' %}">Voltar</a>

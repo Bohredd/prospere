@@ -17,6 +17,13 @@ class Usuario(AbstractUser):
     imagem = models.ImageField(blank=True, null=True,upload_to="usuarios/images")
     pertence_empresa = models.BooleanField(default=False)
     pertence_universidade = models.BooleanField(default=False)
+    is_aluno = models.BooleanField(default=False)
+    empresa_vinculada = models.ForeignKey(
+        'empresa.Empresa', on_delete=models.CASCADE, blank=True, null=True
+    )
+    universidade_vinculada = models.ForeignKey(
+        'universidades.Universidade', on_delete=models.CASCADE, blank=True, null=True
+    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["nome_completo"]

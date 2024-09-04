@@ -8,5 +8,9 @@ class Empresa(models.Model):
     email = models.EmailField(max_length=254, blank=True, null=True, help_text="Email de contato")
     site = models.URLField(max_length=200, blank=True, null=True, help_text="Site da empresa")
 
+    class Meta:
+        verbose_name = 'Empresa'
+        verbose_name_plural = 'Empresas'
+
     def __str__(self):
         return self.nome
