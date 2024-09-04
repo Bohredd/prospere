@@ -34,6 +34,7 @@ class RespostaRequisito(models.Model):
     links = models.URLField(null=True, blank=True)
     checkbox = models.BooleanField(default=False, null=True, blank=True)
     respondido_por = models.ForeignKey('usuarios.Usuario', on_delete=models.CASCADE)
+    respondido_empresa = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'Resposta de Requisito'
