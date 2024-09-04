@@ -18,6 +18,7 @@ class Requisito(models.Model):
 
 class Arquivo(models.Model):
     file = models.FileField(upload_to='respostas_arquivos/')
+    texto = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name = 'Arquivo'
@@ -26,6 +27,60 @@ class Arquivo(models.Model):
     def __str__(self):
         return self.file.name
 
+    def save(self, *args, **kwargs):
+        # Se o objeto já existir, não faz a leitura e a atualização do texto
+        if not self.pk:
+            super(Arquivo, self).save(*args, **kwargs)
+
+        if self.is_texto():
+            # Use a instância existente para evitar duplicações
+            # Lê o arquivo e atualiza o campo texto
+            with self.file.open('r') as file:
+                self.texto = file.read()
+
+            # Atualiza o objeto no banco de dados sem criar uma nova entrada
+            super(Arquivo, self).save(update_fields=['texto'])
+    def is_texto(self):
+
+        exts_text_showable = [
+            'txt',
+            'doc',
+            'docx',
+            'py',
+            'md',
+        ]
+
+        ext = self.file.name.split('.')[-1]
+
+        return ext in exts_text_showable
+
+    def is_image(self):
+
+        exts_image_showable = [
+            'png',
+            'jpg',
+            'jpeg',
+            'gif',
+        ]
+
+        ext = self.file.name.split('.')[-1]
+
+        return ext in exts_image_showable
+
+    def is_pdf(self):
+
+        exts_pdf_showable = [
+            'pdf',
+        ]
+
+        ext = self.file.name.split('.')[-1]
+
+        return ext in exts_pdf_showable
+
+    def get_texto(self):
+        if self.is_texto():
+            return self.texto
+        return None
 class RespostaRequisito(models.Model):
     requisito = models.ForeignKey('core.Requisito', on_delete=models.CASCADE)
     texto = models.TextField(null=True, blank=True)
@@ -43,6 +98,7 @@ class RespostaRequisito(models.Model):
 class Interesse(models.Model):
     vaga = models.ForeignKey('oportunidades.Oportunidade', on_delete=models.CASCADE)
     resposta_requisitos = models.ForeignKey('core.RespostaRequisito', on_delete=models.CASCADE)
+    criado_em = models.DateTimeField(auto_now_add=True)
 
     def get_respondido_por(self):
         return self.resposta_requisitos.respondido_por

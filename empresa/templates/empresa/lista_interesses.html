@@ -1,21 +1,23 @@
-  <h1>Lista de Interesses</h1>
-  <table>
-    <thead>
+<h1>Lista de Interesses</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Oportunidade</th>
+      <th>Criado Em</th>
+      <th>Responder Requisitos</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for interesse in interesses %}
       <tr>
-        <th>Oportunidade</th>
-        <th>Responder Requisitos</th>
+        <td>{{ interesse.vaga }}</td>
+        <td>{{ interesse.criado_em }}</td> <!-- Adicionando a data de criação -->
+        <td><a href="{% url 'detalhe_respostas' interesse.pk %}">Ver Respostas</a></td>
       </tr>
-    </thead>
-    <tbody>
-      {% for interesse in interesses %}
-        <tr>
-          <td>{{ interesse.vaga }}</td>
-          <td><a href="{% url 'detalhe_respostas' interesse.pk %}">Ver Respostas</a></td>
-        </tr>
-      {% empty %}
-        <tr>
-          <td colspan="2">Nenhum interesse encontrado.</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+    {% empty %}
+      <tr>
+        <td colspan="3">Nenhum interesse encontrado.</td> <!-- Atualizado para colspan de 3 -->
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

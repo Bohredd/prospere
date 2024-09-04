@@ -49,4 +49,6 @@ class ListaInteressesView(LoginRequiredMixin, ListView):
         return Interesse.objects.filter(
             vaga__empresa=self.request.user.empresa_vinculada,
             resposta_requisitos__respondido_empresa=False,
+        ).order_by(
+            '-criado_em'
         )

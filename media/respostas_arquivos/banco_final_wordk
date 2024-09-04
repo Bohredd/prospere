@@ -1,0 +1,25 @@
+CREATE TABLE olimpiada (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  ano INTEGER NOT NULL,
+  cidadeSede VARCHAR(100),
+  paisSede VARCHAR(100)
+ );
+  
+CREATE TABLE atleta (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(255),
+    genero VARCHAR(2),
+    idade INTEGER NOT NULL,
+    altura FLOAT NOT NULL,
+    peso FLOAT NOT NULL,
+);
+
+CREATE TABLE participacao (
+  	id INTEGER PRIMARY KEY AUTOINCREMENT,
+    olimpiadaId INT NOT NULL,
+    FOREIGN KEY (olimpiadaId) REFERENCES olimpiada(id),
+  	FOREIGN KEY (premiacaoId) REFERENCES premiacao(id),
+  	FOREIGN KEY (categoriaId) REFERENCES categoria(id),
+);
+
+

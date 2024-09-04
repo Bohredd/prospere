@@ -57,14 +57,19 @@
 <body>
     <div class="container">
         <h1>Oportunidades</h1>
-        <form method="get">
-            {{ filter.form.as_p }}
-            <button type="submit">Filtrar</button>
-        </form>
+        <p>descomentar filtro</p>
+<!--        <form method="get">-->
+<!--            {{ filter.form.as_p }}-->
+<!--            <button type="submit">Filtrar</button>-->
+<!--        </form>-->
         {% for oportunidade in oportunidades %}
             <div class="card">
                 <h2>{{ oportunidade.titulo }}</h2>
-                <p>Tipo: {{ oportunidade.get_tipo_display }}</p>
+                <h3><strong>Tipo: {{ oportunidade.get_tipo_display }}</strong></h3>
+                <p><strong>Descrição:</strong> {{ oportunidade.descricao }}</p>
+                <p><strong>Remuneração:</strong> R$ {{ oportunidade.remuneracao }}</p>
+                <p><strong>Benefícios:</strong> {{ oportunidade.beneficios_oportunidade }}</p>
+                <p><strong>Requisitos:</strong> {{ oportunidade.requisitos_oportunidade }}</p>
                 <a href="{% url 'detalhes_oportunidade' oportunidade.id %}">Ver Detalhes</a>
             </div>
         {% endfor %}

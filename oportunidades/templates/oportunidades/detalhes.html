@@ -21,13 +21,20 @@
             margin-top: 20px;
         }
 
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
         .card {
             background: #fff;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
             padding: 20px;
             transition: 0.3s;
+            flex: 1;
         }
 
         .card:hover {
@@ -46,55 +53,76 @@
             display: block;
             margin-bottom: 5px;
         }
+
+        .button {
+            display: block;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>{{ oportunidade.titulo }}</h1>
-    <div class="card">
-        <h2>Detalhes da Oportunidade</h2>
-        <p><strong>Descrição:</strong> {{ oportunidade.descricao }}</p>
-        <p><strong>Tipo:</strong> {{ oportunidade.get_tipo_display }}</p>
-        <p><strong>Remuneração:</strong> R$ {{ oportunidade.remuneracao }}</p>
-        <p><strong>Quantidade:</strong> {{ oportunidade.quantia }}</p>
-        <p><strong>Quantia Horas Semanais:</strong> {{ oportunidade.quantia_horas_semanais }}</p>
-        <p><strong>Quantia Horas por Dia:</strong> {{ oportunidade.quantia_horas_dia }}</p>
-        <p><strong>Quantia Horas Intervalo por Dia:</strong> {{ oportunidade.quantia_horas_intervalo_dia }}</p>
-        <p><strong>Universidade:</strong> {{ oportunidade.universidade }}</p>
-        <p><strong>Cursos:</strong>
-            {% for curso in oportunidade.cursos.all %}
-            {{ curso.nome }}
-            {% if not forloop.last %},
-            {% endif %}
-            {% endfor %}
-        </p>
-        <p><strong>Áreas de Atuação:</strong>
-            {% for area in oportunidade.areas_atuacao.all %}
-            {{ area.nome }}
-            {% if not forloop.last %},
-            {% endif %}
-            {% endfor %}
-        </p>
-        <p><strong>Cidade:</strong> {{ oportunidade.cidade }}</p>
-        <p><strong>Estado:</strong> {{ oportunidade.estado }}</p>
-        <p><strong>Tipo de Trabalho:</strong> {{ oportunidade.get_tipo_trabalho_display }}</p>
-        <p><strong>Requisitos da Oportunidade:</strong> {{ oportunidade.requisitos_oportunidade }}</p>
-        <p><strong>Benefícios da Oportunidade:</strong> {{ oportunidade.beneficios_oportunidade }}</p>
+
+    <div class="card-container">
+        <div class="card">
+            <h2>Detalhes da Oportunidade</h2>
+            <p><strong>Descrição:</strong> {{ oportunidade.descricao }}</p>
+            <p><strong>Tipo:</strong> {{ oportunidade.get_tipo_display }}</p>
+            <p><strong>Remuneração:</strong> R$ {{ oportunidade.remuneracao }}</p>
+            <p><strong>Quantidade:</strong> {{ oportunidade.quantia }}</p>
+            <p><strong>Quantia Horas Semanais:</strong> {{ oportunidade.quantia_horas_semanais }}</p>
+            <p><strong>Quantia Horas por Dia:</strong> {{ oportunidade.quantia_horas_dia }}</p>
+            <p><strong>Quantia Horas Intervalo por Dia:</strong> {{ oportunidade.quantia_horas_intervalo_dia }}</p>
+            <p><strong>Universidade:</strong> {{ oportunidade.universidade }}</p>
+            <p><strong>Cursos:</strong>
+                {% for curso in oportunidade.cursos.all %}
+                {{ curso.nome }}
+                {% if not forloop.last %},
+                {% endif %}
+                {% endfor %}
+            </p>
+            <p><strong>Áreas de Atuação:</strong>
+                {% for area in oportunidade.areas_atuacao.all %}
+                {{ area.nome }}
+                {% if not forloop.last %},
+                {% endif %}
+                {% endfor %}
+            </p>
+            <p><strong>Cidade:</strong> {{ oportunidade.cidade }}</p>
+            <p><strong>Estado:</strong> {{ oportunidade.estado }}</p>
+            <p><strong>Tipo de Trabalho:</strong> {{ oportunidade.get_tipo_trabalho_display }}</p>
+            <p><strong>Requisitos da Oportunidade:</strong> {{ oportunidade.requisitos_oportunidade }}</p>
+            <p><strong>Benefícios da Oportunidade:</strong> {{ oportunidade.beneficios_oportunidade }}</p>
+        </div>
+
+        <div class="card">
+            <h2>Detalhes da Empresa</h2>
+            <p><strong>Nome:</strong> {{ oportunidade.empresa.nome }}</p>
+            <p><strong>CNPJ:</strong> {{ oportunidade.empresa.cnpj }}</p>
+            <p><strong>Endereço:</strong> {{ oportunidade.empresa.endereco }}</p>
+            <p><strong>Telefone:</strong> {{ oportunidade.empresa.telefone }}</p>
+            <p><strong>Email:</strong> {{ oportunidade.empresa.email }}</p>
+            <p><strong>Site:</strong> <a href="{{ oportunidade.empresa.site }}" target="_blank">{{ oportunidade.empresa.site }}</a></p>
+        </div>
     </div>
 
-    <div class="card">
-        <h2>Detalhes da Empresa</h2>
-        <p><strong>Nome:</strong> {{ oportunidade.empresa.nome }}</p>
-        <p><strong>CNPJ:</strong> {{ oportunidade.empresa.cnpj }}</p>
-        <p><strong>Endereço:</strong> {{ oportunidade.empresa.endereco }}</p>
-        <p><strong>Telefone:</strong> {{ oportunidade.empresa.telefone }}</p>
-        <p><strong>Email:</strong> {{ oportunidade.empresa.email }}</p>
-        <p><strong>Site:</strong> <a href="{{ oportunidade.empresa.site }}" target="_blank">{{ oportunidade.empresa.site }}</a></p>
-    </div>
+    <a href="javascript:history.back()" class="button">Voltar</a>
 
     <form action="{% url 'interesse_oportunidade' oportunidade.id %}" method="get">
         {% csrf_token %}
-        <button type="submit">Tenho Interesse</button>
+        <button type="submit" class="button">Tenho Interesse</button>
     </form>
 </div>
 </body>

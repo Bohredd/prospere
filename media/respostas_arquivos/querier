@@ -1,0 +1,105 @@
+from database import PostgreSQLDatabase
+from config import get_postgrees_var
+
+
+class Query:
+    query_sql: str = ""
+    table: str = ""
+    table_str = ""
+    data = None
+
+    def __init__(self):
+        """
+        Initialize a class who can execute whatever query
+        """
+        postgres_var = get_postgrees_var()
+        self.connection = PostgreSQLDatabase(**postgres_var)
+        self.input_param = self.connection.get_input_param()
+
+    def get_input_param_item(self, input_param: list):
+        """
+        Get whatever from input param -> input_param[items[0]][items[1]]
+        Args:
+            input_param: An list having the array items
+        Returns:
+            What you want from input_param
+        """
+        return self.input_param[input_param[0]][input_param[1]]
+
+    def get_table_name(self, table_name: str):
+        return self.input_param[table_name]
+
+    def execute_query(
+        self,
+        query_type: str,
+        query_sql: str,
+        table: str,
+        data=None,
+        table_str: str = None,
+    ):
+        """
+        Execute a query in database
+        Args:
+            query_type: Type of the query (insert, update, etc)
+            query_sql: The str with the query to be executed
+            table: Name of the table
+            data: Data to be inserted into the table if query_type is insert
+            table_str: String to insert into the table if query_type is select
+        """
+        self.query_sql = query_sql
+        self.table = table
+        self.table_str = table_str
+
+        getattr(
+            self,
+            f"__{query_type.lower()}__",
+        )()
+
+    def __clean__(self):
+        self.query_sql = ""
+        self.data = None
+        self.table = ""
+        self.table_str = ""
+
+    def __select__(self):
+        """
+        Execute an select query in database
+        """
+        print("select funct")
+
+        table = self.get_table_name(self.table)
+
+        obtained_objects = self.connection.access_table(
+            table=table,
+            query=self.query_sql,
+        )
+
+        self.__clean__()
+
+        return obtained_objects
+
+    def __update__(self, table):
+        """
+        Execute an update query in database
+        """
+        print("update funct")
+
+    def __delete__(self, table):
+        """
+        Execute an delete query in database
+        """
+        print("delete funct")
+
+    def __insert__(self, table):
+        """
+        Execute an insert query in database
+        """
+        print("insert funct")
+
+
+query = Query()
+query.execute_query(
+    "InSeRt",
+    "teste",
+)
+
